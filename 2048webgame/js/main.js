@@ -1,8 +1,8 @@
-var board = [];
-var combined = [];
-var name;
-var score = 0;
-var isOver=true;
+let board = [];
+let combined = [];
+let name;
+let score = 0;
+let isOver=true;
 
 /*开始新游戏*/
 function newGame() {
@@ -18,17 +18,17 @@ function newGame() {
 /*初始化*/
 function init() {
     //输入玩家姓名
-    name=prompt("Before starting a new game, please input your name:");
+    name=prompt("Welcome to 2048!\nBefore starting a new game, please input your name:");
     updatePlayer(name);
     
     //画出并初始化棋盘
-    for (var i = 0; i < 4; i++) {
+    for (let i = 0; i < 4; i++) {
     	board[i] = [];
         combined[i] = [];
-        for (var j = 0; j < 4; j++) {
+        for (let j = 0; j < 4; j++) {
             board[i][j] = 0;
             combined[i][j] = false;
-            var gridCell = $('#grid-cell-' + i + '-' + j);
+            let gridCell = $('#grid-cell-' + i + '-' + j);
             gridCell.css('top', getY(i));
             gridCell.css('left', getX(j));
         }
@@ -48,9 +48,9 @@ function createNumber() {
     }
 
     //随机一个位置
-    var ranX = parseInt(Math.floor(Math.random() * 4));
-    var ranY = parseInt(Math.floor(Math.random() * 4));
-    var times = 0;
+    let ranX = parseInt(Math.floor(Math.random() * 4));
+    let ranY = parseInt(Math.floor(Math.random() * 4));
+    let times = 0;
     while (times < 30) {
         if (board[ranX][ranY] == 0) {
             break;
@@ -62,8 +62,8 @@ function createNumber() {
 
     //性能优化
     if (times == 30) {
-        for (var i = 0; i < 4; i++) {
-            for (var j = 0; j < 4; j++) {
+        for (let i = 0; i < 4; i++) {
+            for (let j = 0; j < 4; j++) {
                 if (board[i][j] == 0) {
                     ranX = i;
                     ranY = j;
@@ -73,7 +73,7 @@ function createNumber() {
     }
 
     //随机一个数字
-    var num = Math.random() < 0.5 ? 2 : 4;
+    let num = Math.random() < 0.5 ? 2 : 4;
 
     //在随机位置显示随机数字
     board[ranX][ranY] = num;
@@ -90,9 +90,9 @@ function create1024() {
     }
 
     //随机一个位置
-    var ranX = parseInt(Math.floor(Math.random() * 4));
-    var ranY = parseInt(Math.floor(Math.random() * 4));
-    var times = 0;
+    let ranX = parseInt(Math.floor(Math.random() * 4));
+    let ranY = parseInt(Math.floor(Math.random() * 4));
+    let times = 0;
     while (times < 30) {
         if (board[ranX][ranY] == 0) {
             break;
@@ -104,8 +104,8 @@ function create1024() {
 
     //性能优化
     if (times == 30) {
-        for (var i = 0; i < 4; i++) {
-            for (var j = 0; j < 4; j++) {
+        for (let i = 0; i < 4; i++) {
+            for (let j = 0; j < 4; j++) {
                 if (board[i][j] == 0) {
                     ranX = i;
                     ranY = j;
@@ -129,29 +129,29 @@ $(document).keydown(function (e) {
                 setTimeout('createNumber()', 210);
                 setTimeout('isGameOver()', 300);
             }
-            break;
+            return false;
         case 38: //上
             if (moveUp()) {
                 setTimeout('createNumber()', 210);
                 setTimeout('isGameOver()', 300);
             }
-            break;
+            return false;
         case 39: //右
             if (moveRight()) {
                 setTimeout('createNumber()', 210);
                 setTimeout('isGameOver()', 300);
             }
-            break;
+            return false;
         case 40: //下
             if (moveDown()) {
                 setTimeout('createNumber()', 210);
                 setTimeout('isGameOver()', 300);
             }
-            break;
+            return false;
         default:
             break;
     }
-})
+});
 
 /*判断游戏是否结束*/
 function isGameOver() {
@@ -181,17 +181,16 @@ function moveLeft() {
         return false;
     }
     
-    for (var i = 0; i < 4; i++) {
-        for (var j = 1; j < 4; j++) {
+    for (let i = 0; i < 4; i++) {
+        for (let j = 1; j < 4; j++) {
             //如果不为0，那么他是可能向左移动的
             if (board[i][j] != 0) {
-                for (var k = 0; k < j; k++) {
+                for (let k = 0; k < j; k++) {
                     if (board[i][k] == 0 && noBlockX(i, k, j, board)) {
                         //移动
                         move(i, j, i, k);
                         board[i][k] = board[i][j];
                         board[i][j] = 0;
-                        continue;
                     } else if (board[i][k] == board[i][j] && noBlockX(i, k, j, board) && !combined[i][k]) {
                         //移动
                         move(i, j, i, k);
@@ -203,7 +202,6 @@ function moveLeft() {
                         updateScore(score);
                         //防止二次合并
                         combined[i][k] = true;
-                        continue;
                     }
                 }
             }
@@ -221,15 +219,14 @@ function moveRight() {
         return false;
     }
     
-    for (var i = 0; i < 4; i++) {
-        for (var j = 2; j >= 0; j--) {
+    for (let i = 0; i < 4; i++) {
+        for (let j = 2; j >= 0; j--) {
             if (board[i][j] != 0) {
-                for (var k = 3; k > j; k--) {
+                for (let k = 3; k > j; k--) {
                     if (board[i][k] == 0 && noBlockX(i, j, k, board)) {
                         move(i, j, i, k);
                         board[i][k] = board[i][j];
                         board[i][j] = 0;
-                        continue;
                     } else if (board[i][k] == board[i][j] && noBlockX(i, j, k, board) && !combined[i][k]) {
                         move(i, j, i, k);
                         board[i][k] *= 2;
@@ -237,7 +234,6 @@ function moveRight() {
                         score += board[i][k];
                         updateScore(score);
                         combined[i][k] = true;
-                        continue;
                     }
                 }
             }
@@ -254,15 +250,14 @@ function moveUp() {
         return false;
     }
 
-    for (var j = 0; j < 4; j++) {
-        for (var i = 1; i < 4; i++) {
+    for (let j = 0; j < 4; j++) {
+        for (let i = 1; i < 4; i++) {
             if (board[i][j] != 0) {
-                for (var k = 0; k < i; k++) {
+                for (let k = 0; k < i; k++) {
                     if (board[k][j] == 0 && noBlockY(j, k, i, board)) {
                         move(i, j, k, j);
                         board[k][j] = board[i][j];
                         board[i][j] = 0;
-                        continue;
                     } else if (board[k][j] == board[i][j] && noBlockY(j, k, i, board) && !combined[k][j]) {
                         move(i, j, k, j);
                         board[k][j] *= 2;
@@ -270,7 +265,6 @@ function moveUp() {
                         score += board[k][j];
                         updateScore(score);
                         combined[k][j] = true;
-                        continue;
                     }
                 }
             }
@@ -287,15 +281,14 @@ function moveDown() {
         return false;
     }
 
-    for (var j = 0; j < 4; j++) {
-        for (var i = 2; i >= 0; i--) {
+    for (let j = 0; j < 4; j++) {
+        for (let i = 2; i >= 0; i--) {
             if (board[i][j] != 0) {
-                for (var k = 3; k > i; k--) {
+                for (let k = 3; k > i; k--) {
                     if (board[k][j] == 0 && noBlockY(j, i, k, board)) {
                         move(i, j, k, j);
                         board[k][j] = board[i][j];
                         board[i][j] = 0;
-                        continue;
                     } else if (board[k][j] == board[i][j] && noBlockY(j, i, k, board) && !combined[k][j]) {
                         move(i, j, k, j);
                         board[k][j] *= 2;
@@ -303,7 +296,6 @@ function moveDown() {
                         score += board[k][j];
                         updateScore(score);
                         combined[k][j] = true;
-                        continue;
                     }
                 }
             }
@@ -317,10 +309,10 @@ function moveDown() {
 /*更新棋盘*/
 function updateBoard() {
     $('.number-cell').remove();
-    for (var i = 0; i < 4; i++) {
-        for (var j = 0; j < 4; j++) {
+    for (let i = 0; i < 4; i++) {
+        for (let j = 0; j < 4; j++) {
             $('#grid-container').append('<div class="number-cell" id="number-cell-' + i + '-' + j + '"></div>')
-            var theNumberCell = $('#number-cell-' + i + '-' + j);
+            let theNumberCell = $('#number-cell-' + i + '-' + j);
             if (board[i][j] == 0) {
                 //无数值则不显示
                 theNumberCell.css({
@@ -354,8 +346,8 @@ function updateBoard() {
 /*更新历史数据*/
 function updateHistory(win) {
     isOver = true;
-    var playerInfo={};
-    var historyInfo = JSON.parse(localStorage.getItem("infoStorage"));//用户历史信息
+    let playerInfo={};
+    let historyInfo = JSON.parse(localStorage.getItem("infoStorage"));//用户历史信息
     playerInfo.name = name;
     playerInfo.time = currentDate();
     playerInfo.score = score;
@@ -369,10 +361,10 @@ function updateHistory(win) {
 
 /*显示排行榜*/
 function displayRanking() {
-	var historyInfo = JSON.parse(localStorage.getItem("infoStorage"));//用户历史信息
-    var ranking = historyInfo;
+	let historyInfo = JSON.parse(localStorage.getItem("infoStorage"));//用户历史信息
+    let ranking = historyInfo;
     //对数组按照分数排序
-    var k, m, tmp;
+    let k, m, tmp;
     for (k = 1; k < ranking.length; k++){
         tmp = ranking[k];
         m = k - 1;
@@ -384,8 +376,8 @@ function displayRanking() {
         ranking[m + 1] = tmp;
     }
 	//在表格中显示
-    for(var f = ranking.length - 1;f >= 0;f--){
-        var res = (ranking[f].win) ? "Win" : "Lose";
+    for(let f = ranking.length - 1;f >= 0;f--){
+        let res = (ranking[f].win) ? "Win" : "Lose";
         document.getElementById('list').rows[ranking.length-f].cells[1].innerText = ranking[f].name;
         document.getElementById('list').rows[ranking.length-f].cells[2].innerText = ranking[f].score;
         document.getElementById('list').rows[ranking.length-f].cells[3].innerText = res;
@@ -395,11 +387,11 @@ function displayRanking() {
 
 /*显示历史记录*/
 function displayHistory() {
-    var historyInfo = JSON.parse(localStorage.getItem("infoStorage"));//用户历史信息
-    var ranking = historyInfo;
+    let historyInfo = JSON.parse(localStorage.getItem("infoStorage"));//用户历史信息
+    let ranking = historyInfo;
 	//在表格中显示
-	for(var f = ranking.length - 1;f >= 0;f--){
-        var res = (ranking[f].win) ? "Win" : "Lose";
+	for(let f = ranking.length - 1;f >= 0;f--){
+        let res = (ranking[f].win) ? "Win" : "Lose";
         document.getElementById('list').rows[ranking.length-f].cells[0].innerText = ranking[f].name;
         document.getElementById('list').rows[ranking.length-f].cells[1].innerText = ranking[f].score;
         document.getElementById('list').rows[ranking.length-f].cells[2].innerText = res;
@@ -416,20 +408,20 @@ function clearHistory() {
 
 /*获取当前日期时间*/
 function currentDate() {
-    var now = new Date();
-    var year = now.getFullYear();
-    var month = now.getMonth();
-    var date = now.getDate();
-    var hour = now.getHours();
-    var min = now.getMinutes();
-    var sec = now.getSeconds();
+    let now = new Date();
+    let year = now.getFullYear();
+    let month = now.getMonth();
+    let date = now.getDate();
+    let hour = now.getHours();
+    let min = now.getMinutes();
+    let sec = now.getSeconds();
 	month = month + 1;
     if (month < 10) month = "0" + month;
     if (date < 10) date = "0" + date;
     if (hour < 10) hour = "0" + hour;
     if (min < 10) min = "0" + min;
     if (sec < 10) sec = "0" + sec;
-    var time = "";
+    let time = "";
     time = year + "-" + month + "-" + date + " " + hour + ":" + min + ":" + sec;
 	return time;
 }

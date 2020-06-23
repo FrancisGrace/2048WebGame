@@ -14,17 +14,16 @@
 	<header>
  	   <h1>2048</h1>
  	   <h2>Join the numbers and get to the 2048 tile!</h2>
-    	<a href="ranking.html" target="_blank" id="Button" style="float: left">Ranking List</a>
-    	<a href="history.html" target="_blank" id="Button" style="float: right">History</a>
-    	<a href="javascript:newGame()" id="Button" >New Game</a>
-    	<p>Player:<span id="player"></span></p>
-    	<p>Score:<span id="score">0</span></p>
+    	<a href="ranking.html" target="_blank" class="Button" >Ranking List</a>
+		<a href="javascript:newGame()" class="Button" >New Game</a>
+    	<a href="history.html" target="_blank" class="Button" >History</a>
+    	<p>Player:<span id="player"></span><br/>Score:<span id="score">0</span></p>
 	</header>
 
 	<div id="grid-container"></div>
 	
 	<script>
-		var i,j,h=[''];
+		let i,j,h=[''];
 		for (i=0;i<4;i++){
 			for (j=0;j<4;j++){
 				h.push('<div class="grid-cell" id="grid-cell-'+i+'-'+j+'"></div>')
@@ -33,13 +32,7 @@
 		document.getElementById("grid-container").innerHTML=h.join(' ');
 	</script>
 	
-	<div class="test">
-		<a href="javascript:win()" id="Button" style="float: left">Win the game</a>
-		<a href="javascript:create1024()" id="Button" style="float: left">Create1024</a>
-    	<a href="javascript:lose()" id="Button">Game Over</a>
-	</div>
-	
 	<footer>
-		<p>Designed by Francis Grace Zhang</p>
+		<p>v2.0 Designed by Francis Grace Zhang</p>
 	</footer>
 </body>

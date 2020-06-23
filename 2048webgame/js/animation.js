@@ -1,5 +1,5 @@
 function showNumber(i,j,num) {
-    var numberCell = $('#number-cell-' + i + '-' + j);
+    let numberCell = $('#number-cell-' + i + '-' + j);
     numberCell.css('background-color',getBgColor(num));
     numberCell.css('color',getColor(num));
     numberCell.text(num);
@@ -14,7 +14,7 @@ function showNumber(i,j,num) {
 }
 
 function move(fromX,fromY,toX,toY) {
-    var numberCell = $('#number-cell-' + fromX + '-' + fromY);
+    let numberCell = $('#number-cell-' + fromX + '-' + fromY);
     numberCell.animate({
         top:getY(toX),
         left:getX(toY)

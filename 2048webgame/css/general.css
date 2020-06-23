@@ -2,11 +2,10 @@ header{
     margin: 0 auto;
     display: block;
     text-align: center;
-    width: 500px;
 }
 
 header>h1{
-    font-family: Consolas,Arial,宋体;
+    font-family: Consolas,Arial,sans-serif;
     color: yellow;
     font-weight: bold;
     font-size: 50px;
@@ -14,18 +13,18 @@ header>h1{
 }
 
 header>h2{
-    font-family: Consolas,Arial,宋体;
+    font-family: Consolas,Arial,sans-serif;
     color: yellow;
     font-weight: bold;
     font-size: 20px;
     margin: 0 auto;
 }
 
-header #Button{
+header .Button{
     text-decoration: none;
-    display: block;
-    font-family: Georgia,Arial,宋体;
-    margin: 0 auto;
+    display: inline-block;
+    font-family: Georgia,"Times New Roman",serif;
+    margin: 5px 10px;
     padding: 10px 10px;
     color: white;
     border-radius: 10px;
@@ -34,7 +33,7 @@ header #Button{
     width: 100px;
 }
 
-header #Button:hover{
+header .Button:hover{
     color:black;
     background-color:white;
 }
@@ -42,16 +41,15 @@ header #Button:hover{
 #list{
 	background-color: #f5f5f5;
 	opacity: 0.8;
-	font-family: Consolas,Arial,宋体;
+	font-family: Consolas,Arial,sans-serif;
 	font-size:20px;
 	border: 1px solid black;
 }
 
 footer{
-	font-family: Lucida Handwriting,Arial,宋体;
+	font-family: Lucida Handwriting,Arial,sans-serif;
 	color: aqua;
     font-size: 20px;
-    width:500px;
     text-align: center;
     margin: 0 auto;
 }
