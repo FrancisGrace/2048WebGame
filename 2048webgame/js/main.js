@@ -2,14 +2,14 @@ let board = [];
 let combined = [];
 let name;
 let score = 0;
-let isOver=true;
+let isOver = true;
 
 /*开始新游戏*/
 function newGame() {
-    if (!isOver){
-    	lose();
+    if (!isOver) {
+        lose();
     }	//考虑玩家中途放弃的情况
-    isOver=false;
+    isOver = false;
     init();
     createNumber();
     createNumber();	//在随机两个格子生成数字
@@ -18,12 +18,12 @@ function newGame() {
 /*初始化*/
 function init() {
     //输入玩家姓名
-    name=prompt("Welcome to 2048!\nBefore starting a new game, please input your name:");
+    name = prompt("Welcome to 2048!\nBefore starting a new game, please input your name:");
     updatePlayer(name);
-    
+
     //画出并初始化棋盘
     for (let i = 0; i < 4; i++) {
-    	board[i] = [];
+        board[i] = [];
         combined[i] = [];
         for (let j = 0; j < 4; j++) {
             board[i][j] = 0;
@@ -162,16 +162,16 @@ function isGameOver() {
 
 /*失败*/
 function lose() {
-    alert("Game Over!\nYour score is "+score+"!");
+    alert("Game Over!\nYour score is " + score + "!");
     updateHistory(false);
     window.location.reload();
 }
 
 /*获胜*/
 function win() {
-	alert("Congratulations!\nYour score is "+score+"!");
-	updateHistory(true);
-	window.location.reload();
+    alert("Congratulations!\nYour score is " + score + "!");
+    updateHistory(true);
+    window.location.reload();
 }
 
 /*向左移动*/
@@ -180,7 +180,7 @@ function moveLeft() {
     if (!canMoveLeft(board)) {
         return false;
     }
-    
+
     for (let i = 0; i < 4; i++) {
         for (let j = 1; j < 4; j++) {
             //如果不为0，那么他是可能向左移动的
@@ -218,7 +218,7 @@ function moveRight() {
     if (!canMoveRight(board)) {
         return false;
     }
-    
+
     for (let i = 0; i < 4; i++) {
         for (let j = 2; j >= 0; j--) {
             if (board[i][j] != 0) {
@@ -333,11 +333,13 @@ function updateBoard() {
                 });
                 theNumberCell.text(board[i][j]);
                 if (theNumberCell.text() == 1024 || theNumberCell.text() == 2048) {
-                    theNumberCell.css('font-size','45px');
+                    theNumberCell.css('font-size', '45px');
                 }
             }
             combined[i][j] = false;
-            if (board[i][j] == 2048){win();}
+            if (board[i][j] == 2048) {
+                win();
+            }
         }
     }
 }
@@ -346,42 +348,41 @@ function updateBoard() {
 /*更新历史数据*/
 function updateHistory(win) {
     isOver = true;
-    let playerInfo={};
+    let playerInfo = {};
     let historyInfo = JSON.parse(localStorage.getItem("infoStorage"));//用户历史信息
     playerInfo.name = name;
     playerInfo.time = currentDate();
     playerInfo.score = score;
-    playerInfo.win = win;   
-    if(historyInfo == null){
-		historyInfo = new Array();
+    playerInfo.win = win;
+    if (historyInfo == null) {
+        historyInfo = new Array();
     }
     historyInfo.push(playerInfo);//将用户的信息对象放入数组中
-    localStorage.setItem("infoStorage",JSON.stringify(historyInfo));//存入本地
+    localStorage.setItem("infoStorage", JSON.stringify(historyInfo));//存入本地
 }
 
 /*显示排行榜*/
 function displayRanking() {
-	let historyInfo = JSON.parse(localStorage.getItem("infoStorage"));//用户历史信息
+    let historyInfo = JSON.parse(localStorage.getItem("infoStorage"));//用户历史信息
     let ranking = historyInfo;
     //对数组按照分数排序
     let k, m, tmp;
-    for (k = 1; k < ranking.length; k++){
+    for (k = 1; k < ranking.length; k++) {
         tmp = ranking[k];
         m = k - 1;
-        while (m >= 0 && tmp.score < ranking[m].score)
-        {
+        while (m >= 0 && tmp.score < ranking[m].score) {
             ranking[m + 1] = ranking[m];
             m--;
         }
         ranking[m + 1] = tmp;
     }
-	//在表格中显示
-    for(let f = ranking.length - 1;f >= 0;f--){
+    //在表格中显示
+    for (let f = ranking.length - 1; f >= 0; f--) {
         let res = (ranking[f].win) ? "Win" : "Lose";
-        document.getElementById('list').rows[ranking.length-f].cells[1].innerText = ranking[f].name;
-        document.getElementById('list').rows[ranking.length-f].cells[2].innerText = ranking[f].score;
-        document.getElementById('list').rows[ranking.length-f].cells[3].innerText = res;
-        document.getElementById('list').rows[ranking.length-f].cells[4].innerText = ranking[f].time;
+        document.getElementById('list').rows[ranking.length - f].cells[1].innerText = ranking[f].name;
+        document.getElementById('list').rows[ranking.length - f].cells[2].innerText = ranking[f].score;
+        document.getElementById('list').rows[ranking.length - f].cells[3].innerText = res;
+        document.getElementById('list').rows[ranking.length - f].cells[4].innerText = ranking[f].time;
     }
 }
 
@@ -389,13 +390,13 @@ function displayRanking() {
 function displayHistory() {
     let historyInfo = JSON.parse(localStorage.getItem("infoStorage"));//用户历史信息
     let ranking = historyInfo;
-	//在表格中显示
-	for(let f = ranking.length - 1;f >= 0;f--){
+    //在表格中显示
+    for (let f = ranking.length - 1; f >= 0; f--) {
         let res = (ranking[f].win) ? "Win" : "Lose";
-        document.getElementById('list').rows[ranking.length-f].cells[0].innerText = ranking[f].name;
-        document.getElementById('list').rows[ranking.length-f].cells[1].innerText = ranking[f].score;
-        document.getElementById('list').rows[ranking.length-f].cells[2].innerText = res;
-        document.getElementById('list').rows[ranking.length-f].cells[3].innerText = ranking[f].time;
+        document.getElementById('list').rows[ranking.length - f].cells[0].innerText = ranking[f].name;
+        document.getElementById('list').rows[ranking.length - f].cells[1].innerText = ranking[f].score;
+        document.getElementById('list').rows[ranking.length - f].cells[2].innerText = res;
+        document.getElementById('list').rows[ranking.length - f].cells[3].innerText = ranking[f].time;
     }
 }
 
@@ -415,7 +416,7 @@ function currentDate() {
     let hour = now.getHours();
     let min = now.getMinutes();
     let sec = now.getSeconds();
-	month = month + 1;
+    month = month + 1;
     if (month < 10) month = "0" + month;
     if (date < 10) date = "0" + date;
     if (hour < 10) hour = "0" + hour;
@@ -423,5 +424,5 @@ function currentDate() {
     if (sec < 10) sec = "0" + sec;
     let time = "";
     time = year + "-" + month + "-" + date + " " + hour + ":" + min + ":" + sec;
-	return time;
+    return time;
 }

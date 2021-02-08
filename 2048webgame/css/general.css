@@ -1,29 +1,26 @@
-header{
-    margin: 0 auto;
-    display: block;
+* {
     text-align: center;
 }
 
-header>h1{
-    font-family: Consolas,Arial,sans-serif;
+header > h1, header > h2 {
+    font-family: Consolas, Arial, sans-serif;
     color: yellow;
     font-weight: bold;
+    margin: 0 auto;
+}
+
+header > h1 {
     font-size: 50px;
-    margin: 0 auto;
 }
 
-header>h2{
-    font-family: Consolas,Arial,sans-serif;
-    color: yellow;
-    font-weight: bold;
+header > h2 {
     font-size: 20px;
-    margin: 0 auto;
 }
 
-header .Button{
+header .Button {
     text-decoration: none;
     display: inline-block;
-    font-family: Georgia,"Times New Roman",serif;
+    font-family: Georgia, "Times New Roman", serif;
     margin: 5px 10px;
     padding: 10px 10px;
     color: white;
@@ -33,23 +30,22 @@ header .Button{
     width: 100px;
 }
 
-header .Button:hover{
-    color:black;
-    background-color:white;
+header .Button:hover {
+    color: black;
+    background-color: white;
 }
 
-#list{
-	background-color: #f5f5f5;
-	opacity: 0.8;
-	font-family: Consolas,Arial,sans-serif;
-	font-size:20px;
-	border: 1px solid black;
+#list {
+    background-color: #f5f5f5;
+    opacity: 0.8;
+    font-family: Consolas, Arial, sans-serif;
+    font-size: 20px;
+    border: 1px solid black;
 }
 
-footer{
-	font-family: Lucida Handwriting,Arial,sans-serif;
-	color: aqua;
+footer {
+    font-family: Lucida Handwriting, cursive;
+    color: aqua;
     font-size: 20px;
     text-align: center;
-    margin: 0 auto;
 }

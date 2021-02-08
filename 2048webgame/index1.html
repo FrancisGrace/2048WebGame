@@ -11,28 +11,28 @@
 <script src="./js/animation.js"></script>
 <script src="./js/judge.js"></script>
 <body>
-	<header>
- 	   <h1>2048</h1>
- 	   <h2>Join the numbers and get to the 2048 tile!</h2>
-    	<a href="ranking.html" target="_blank" class="Button" >Ranking List</a>
-		<a href="javascript:newGame()" class="Button" >New Game</a>
-    	<a href="history.html" target="_blank" class="Button" >History</a>
-    	<p>Player:<span id="player"></span><br/>Score:<span id="score">0</span></p>
-	</header>
+<header>
+    <h1>2048</h1>
+    <h2>Join the numbers and get to the 2048 tile!</h2>
+    <a href="ranking.html" target="_blank" class="Button">Ranking List</a>
+    <a href="javascript:newGame()" class="Button">New Game</a>
+    <a href="history.html" target="_blank" class="Button">History</a>
+    <p>Player:<span id="player"></span><br/>Score:<span id="score">0</span></p>
+</header>
 
-	<div id="grid-container"></div>
-	
-	<script>
-		let i,j,h=[''];
-		for (i=0;i<4;i++){
-			for (j=0;j<4;j++){
-				h.push('<div class="grid-cell" id="grid-cell-'+i+'-'+j+'"></div>')
-			}
-		}
-		document.getElementById("grid-container").innerHTML=h.join(' ');
-	</script>
-	
-	<footer>
-		<p>v2.0 Designed by Francis Grace Zhang</p>
-	</footer>
+<div id="grid-container"></div>
+
+<script>
+    let i, j, h = [''];
+    for (i = 0; i < 4; i++) {
+        for (j = 0; j < 4; j++) {
+            h.push('<div class="grid-cell" id="grid-cell-' + i + '-' + j + '"></div>')
+        }
+    }
+    document.getElementById("grid-container").innerHTML = h.join(' ');
+</script>
+
+<footer>
+    <p>v2.0 Designed by Francis Grace Zhang</p>
+</footer>
 </body>
