@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ranking List</title>
+</head>
+<link rel="stylesheet" href="./css/ranking.css">
+<link rel="stylesheet" href="./css/general.css">
+<script src="./js/main.js"></script>
+<script type="text/javascript">
+    window.onload = function () {
+        let fun = displayRanking;
+        fun();
+    };
+</script>
+<body>
+<header>
+    <h1>Ranking List</h1>
+    <h2>Top 50</h2>
+    <a href="javascript:clearHistory()" class="button">Clear</a>
+</header>
+
+<div style="margin: 0 auto;width:1000px;">
+    <table id="list" border="1" frame="hsides" rules="rows" width="100%">
+    </table>
+</div>
+
+<script>
+    let i, h = ['<tr><th>Rank<\/th><th>Player<\/th><th>Score<\/th><th>Result<\/th><th>Time<\/th><\/tr>'];
+    for (i = 1; i <= 50; i++) {
+        h.push('<tr><th>' + i + '<\/th><th><\/th><th><\/th><th><\/th><th><\/th><\/tr>');
+    }
+    document.getElementById("list").innerHTML = h.join(' ');
+</script>
+
+<footer>
+    <p>v2.0 Designed by Francis Grace Zhang</p>
+</footer>
+</body>
+</html>

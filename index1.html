@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>2048</title>
+</head>
+<link rel="stylesheet" href="./css/index.css">
+<link rel="stylesheet" href="./css/general.css">
+<script src="./js/jquery-1.11.0.js"></script>
+<script src="./js/main.js"></script>
+<script src="./js/animation.js"></script>
+<script src="./js/judge.js"></script>
+<body>
+<header>
+    <h1>2048</h1>
+    <h2>Join the numbers and get to the 2048 tile!</h2>
+    <a href="ranking.html" target="_blank" class="button">Ranking List</a>
+    <a href="javascript:newGame()" class="button">New Game</a>
+    <a href="history.html" target="_blank" class="button">History</a>
+    <p id="scoreboard">Player:<span id="player"></span><br/>Score:<span id="score">0</span></p>
+</header>
+
+<div id="grid-container"></div>
+
+<script>
+    let i, j, h = [''];
+    for (i = 0; i < 4; i++) {
+        for (j = 0; j < 4; j++) {
+            h.push('<div class="grid-cell" id="grid-cell-' + i + '-' + j + '"></div>')
+        }
+    }
+    document.getElementById("grid-container").innerHTML = h.join(' ');
+</script>
+
+<footer>
+    <p>v2.0 Designed by Francis Grace Zhang</p>
+</footer>
+</body>
